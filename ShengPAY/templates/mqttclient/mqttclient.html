@@ -1,0 +1,100 @@
+<!doctype html>
+{% load static %}
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+<link href="file:///D:/Xia_Project/DjangoProject/ShengPAY/ShengPAY/static/css/mqttclient.css" rel="stylesheet" type="text/css">
+<link href="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.css" rel="stylesheet">
+<link href="{% static "css/mqttclient.css" %}" rel="stylesheet" type="text/css">
+<link href="{% static "images/mqttclient/iconfont.css" %}" rel="stylesheet" type="text/css">
+<body>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">登录以获取凭证</h5>
+              <strong>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </strong></div>
+            <div class="modal-body">
+              <div class="input-group mb-3"> <strong>
+                <input type="text" class="form-control ledger-login-user" placeholder="账号">
+              </strong></div>
+              <div class="input-group mb-3"> <strong>
+                <input type="password" class="form-control ledger-login-psw" placeholder="密码">
+              </strong></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><strong>关闭</strong></button>
+              <button type="button" class="btn btn-primary ledger-login-submit" data-bs-dismiss="modal">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% load static %}
+<div class="container">
+  <nav class="navbar navbar-expand-sm navbar-dark ledger-head" style="border-radius: 5px"> <a style="margin-left: 5px" class="navbar-brand" href="#">MqttClient</a>
+    <ul class="navbar-nav">
+      <li class="nav-item"> <a class="nav-link" href="/ledger">Ledger</a> </li>
+      <li class="nav-item"> <a class="nav-link" href="/tempnet">TempNet</a> </li>
+    </ul>
+  </nav>
+</div>
+<div class="container">
+  <div class="row ledger-card-container">
+    <div class="col-4 d-flex flex-column">
+      <div class="ledger-card-left-toolbar d-flex">
+        <div class="input-container flex-grow-1 d-flex flex-column justify-content-end">
+          <form class="d-flex justify-content-center">
+            <input placeholder="输入域名或IP" class="form-control ledger-ip-input" id="ledger-server-ip" type="text">
+          </form>
+        </div>
+        <div class="button-container d-flex justify-content-center">
+          <div class="d-flex flex-column justify-content-center"> <span id="ledger-server-connect" class="iconfont icon-bofang" style="font-size: 32px"></span></div>
+        </div>
+      </div>
+      <div class="ledger-card-left-listcontainer flex-grow-1">
+        <ul class="list-group" id="ledger-topic-list">
+          <li class="list-group-item d-flex ledger-topic-item"> <span>TOPIC:你干嘛哎哟</span>
+            <div class="flex-grow-1 d-flex justify-content-end"> <span alt="" class="ledger-topic-delete iconfont icon-guanbi" style="font-size: 24px"></span> </div>
+          </li>
+        </ul>
+      </div>
+      <div class="ledger-card-left-toolbar-bottom d-flex">
+        <div class="flex-grow-1 d-flex flex-column justify-content-end">
+			<form class="d-flex justify-content-center">
+            <input placeholder="输入要添加的topic名称" class="form-control ledger-ip-input" id="ledger-topic-name" type="text">
+          </form>  
+		</div>
+        <div class="button-container d-flex justify-content-center">
+          <div class="d-flex flex-column justify-content-center"> <span id="ledger-topic-add" class="iconfont icon-a-shuyi_tianjia-" style="font-size: 32px"></span> </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 d-flex flex-column">
+      <div class="ledger-card-right-listchat flex-grow-1">
+        <ul class="list-group ledger-msg-list">	
+        </ul>
+      </div>
+      <div class="ledger-card-right-chatsend d-flex">
+        <textarea id="ledger-msg" class="flex-grow-1" style="resize: none"></textarea>
+        <div class="chatsend-container d-flex flex-column justify-content-end">
+          <div class="d-flex justify-content-end"> <span class="msg-send-btn iconfont icon-fabu" style="font-size: 32px" > </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.staticfile.net/jquery/3.7.1/jquery.min.js"></script> 
+<script src="https://cdn.bootcdn.net/ajax/libs/fetch/3.6.20/fetch.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.3.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/paho-mqtt/1.1.0/paho-mqtt.min.js"></script>
+<script src="file:///D:/Xia_Project/DjangoProject/ShengPAY/ShengPAY/static/js/MqttClient.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script src="{% static "js/MqttClient.js" %}"></script>
+</body>
+</html>

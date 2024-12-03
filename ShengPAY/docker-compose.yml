@@ -1,0 +1,40 @@
+version: '3'  # Docker Compose 文件版本，这里使用 3
+
+services:  # 定义服务列表
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+     
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro # ro表示文件只读的意思
+      - static_volumes:/app/static:ro
+      - media_volumes:/app/media:ro
+      - ledger_sqlite:/app/db
+      - gunicorn_sock:/app/var/run  # 挂载 gunicorn_sock 卷到 nginx 容器的 /app/var/run 目录
+    networks:
+      - app-network
+    depends_on:
+      - web
+  web:  # 第一个服务名称为 'web'
+    build: .  # 指定 Dockerfile 所在目录为当前目录（'.'），用于构建镜像
+    volumes:
+      - ledger_sqlite:/app/db
+      - gunicorn_sock:/app/var/run  # 挂载 gunicorn_sock 卷到 web 容器的 /app/var/run 目录
+      - static_volumes:/app/static:ro
+      - media_volumes:/app/media:ro      
+    command: ["gunicorn", "--bind", "unix:/app/var/run/gunicorn.sock", "ShengPAY.wsgi:application"]   
+    networks:
+      - app-network
+    
+      
+networks:
+  app-network:
+    driver: bridge
+    
+volumes:
+  gunicorn_sock:  # 定义socket共享卷, 保证两个容器都能访问到
+  static_volumes:
+  media_volumes:
+  ledger_sqlite:

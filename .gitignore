@@ -1,0 +1,6 @@
+.vscode/
+bin/
+include/
+lib/
+ShengPAY/static
+ShengPAY/static_new
